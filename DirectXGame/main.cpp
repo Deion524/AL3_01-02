@@ -25,13 +25,13 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 			break;
 		}
 
-		// ゲームシーンの更新
+		// ゲームシーンの更新処理
 		gameScene->Update();
 
 		// 描画開始
 		dxCommon->PreDraw();
 
-		// ゲームシーンの描画
+		// ゲームシーンの描画処理
 		gameScene->Draw();
 
 		// 描画終了
