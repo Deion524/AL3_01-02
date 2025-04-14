@@ -1,6 +1,7 @@
 #pragma once
 
 #include "KamataEngine.h"
+#include <vector>
 
 class GameScene {
 public:
@@ -18,4 +19,8 @@ public:
 	void Draw();
 
 private:
+	//// モデルデータ
+	//KamataEngine::Model* model_ = nullptr;
+	//// ブロック用ワールドトランスフォーム
+	//std::vector<WorldTransform*> worldTransformBlocks_;
 };
