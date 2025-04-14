@@ -40,7 +40,7 @@ void GameScene::Initialize() {
 	// デバッグカメラ
 	debugCamera_ = new DebugCamera(1280, 720);
 	// ライン描画が参照するカメラを指定する
-	PrimitiveDrawer::GetInstance()->SetCamera(&camera_);
+	PrimitiveDrawer::GetInstance()->SetCamera(&debugCamera_->GetCamera());
 	// 軸方向の表示を有効にする
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetCamera(&debugCamera_->GetCamera());
@@ -97,16 +97,19 @@ void GameScene::Draw() {
 	Model::PreDraw(dxCommon->GetCommandList());
 
 	// 通常時
-	//model_->Draw(worldTransform_, camera_, textureHandle_);
+	// model_->Draw(worldTransform_, camera_, textureHandle_);
 
 	// デバッグ時
 	model_->Draw(worldTransform_, debugCamera_->GetCamera(), textureHandle_);
 
 	// ラインを描画する
-	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, 0}, {0, 10, 0}, {1.0f, 0.0f, 0.0f, 1.0f});
+	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, -10}, {0, 0, 10}, {1.0f, 0.0f, 0.0f, 1.0f});
+	PrimitiveDrawer::GetInstance()->DrawLine3d({-10, 0, 0}, {10, 0, 0}, {1.0f, 0.0f, 0.0f, 1.0f});
+	for (int i = 0; i < 11; ++i) {
+		PrimitiveDrawer::GetInstance()->DrawLine3d({-10.0f + 2.0f * i, 0, -10}, {-10.0f + 2.0f * i, 0, 10}, {0.0f, 0.0f, 0.0f, 1.0f});
+		PrimitiveDrawer::GetInstance()->DrawLine3d({-10, 0, -10.0f + 2.0f * i}, {10, 0, -10.0f + 2.0f * i}, {0.0f, 0.0f, 0.0f, 1.0f});
+	}
 
 	// 3Dモデルの描画後処理
 	Model::PostDraw();
-
-
 }
